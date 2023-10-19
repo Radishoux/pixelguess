@@ -1,13 +1,6 @@
 import React from 'react'
 var axios = require('axios');
 
-var data = JSON.stringify({
-    "collection": "pics",
-    "database": "pics",
-    "dataSource": "photos",
-    "projection": {}
-});
-
 function PixlImg() {
   return (
     <img
