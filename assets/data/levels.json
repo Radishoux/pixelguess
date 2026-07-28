@@ -1,0 +1,64 @@
+{
+  "levels": [
+    {
+      "id": 1,
+      "image": "assets/images/levels/level_01.png",
+      "answer": "mona lisa",
+      "alternatives": ["monalisa", "la joconde"]
+    },
+    {
+      "id": 2,
+      "image": "assets/images/levels/level_02.png",
+      "answer": "microphone",
+      "alternatives": ["mic"]
+    },
+    {
+      "id": 3,
+      "image": "assets/images/levels/level_03.png",
+      "answer": "donut",
+      "alternatives": ["doughnut"]
+    },
+    {
+      "id": 4,
+      "image": "assets/images/levels/level_04.png",
+      "answer": "umbrella",
+      "alternatives": []
+    },
+    {
+      "id": 5,
+      "image": "assets/images/levels/level_05.png",
+      "answer": "owl",
+      "alternatives": []
+    },
+    {
+      "id": 6,
+      "image": "assets/images/levels/level_06.png",
+      "answer": "robot",
+      "alternatives": []
+    },
+    {
+      "id": 7,
+      "image": "assets/images/levels/level_07.png",
+      "answer": "hammer",
+      "alternatives": []
+    },
+    {
+      "id": 8,
+      "image": "assets/images/levels/level_08.png",
+      "answer": "mountain",
+      "alternatives": []
+    },
+    {
+      "id": 9,
+      "image": "assets/images/levels/level_09.png",
+      "answer": "bicycle",
+      "alternatives": ["bike"]
+    },
+    {
+      "id": 10,
+      "image": "assets/images/levels/level_10.png",
+      "answer": "coffee cup",
+      "alternatives": ["cup of coffee", "coffee"]
+    }
+  ]
+}
