@@ -1,30 +1,38 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:pixelguess/main.dart';
+import 'package:pixelguess/app.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('app boots to level select showing all 10 levels', (tester) async {
+    SharedPreferences.setMockInitialValues({});
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // GridView.builder only builds on-screen items — use a tall viewport so
+    // all 10 level cards are visible without needing to scroll.
+    tester.view.physicalSize = const Size(1200, 2600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    await tester.pumpWidget(const ProviderScope(child: PixelGuessApp()));
+    await tester.pumpAndSettle();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text('PixelGuess'), findsOneWidget);
+    for (var id = 1; id <= 10; id++) {
+      expect(find.text('$id'), findsOneWidget);
+    }
+
+    // Unmount so ProviderScope disposes its container — otherwise the
+    // energy ticker's periodic Timer outlives the widget tree and trips
+    // the test framework's "no pending timers" invariant check. One more
+    // pump lets the disposal-triggered subscription cancellation's
+    // microtask actually flush before the test ends.
+    await tester.pumpWidget(const SizedBox());
+    // autoDispose providers debounce disposal by one tick (a zero-duration
+    // Timer) so a widget that unsubscribes and resubscribes within the
+    // same frame doesn't churn — advance fake time past that tick so the
+    // ticker's periodic Timer is actually cancelled before test teardown.
+    await tester.pump(const Duration(milliseconds: 1));
   });
 }
