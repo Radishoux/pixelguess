@@ -2,63 +2,63 @@
   "levels": [
     {
       "id": 1,
-      "image": "assets/images/levels/level_01.png",
+      "image": "assets/images/levels/level_01.jpg",
       "answer": "mona lisa",
       "alternatives": ["monalisa", "la joconde"]
     },
     {
       "id": 2,
-      "image": "assets/images/levels/level_02.png",
-      "answer": "microphone",
-      "alternatives": ["mic"]
+      "image": "assets/images/levels/level_02.jpg",
+      "answer": "cow",
+      "alternatives": []
     },
     {
       "id": 3,
       "image": "assets/images/levels/level_03.png",
-      "answer": "donut",
-      "alternatives": ["doughnut"]
+      "answer": "github",
+      "alternatives": ["git hub"]
     },
     {
       "id": 4,
-      "image": "assets/images/levels/level_04.png",
-      "answer": "umbrella",
-      "alternatives": []
+      "image": "assets/images/levels/level_04.jpg",
+      "answer": "youtube music",
+      "alternatives": ["yt music", "youtube"]
     },
     {
       "id": 5,
-      "image": "assets/images/levels/level_05.png",
-      "answer": "owl",
-      "alternatives": []
+      "image": "assets/images/levels/level_05.webp",
+      "answer": "instagram",
+      "alternatives": ["insta", "ig"]
     },
     {
       "id": 6,
-      "image": "assets/images/levels/level_06.png",
-      "answer": "robot",
+      "image": "assets/images/levels/level_06.jpg",
+      "answer": "netflix",
       "alternatives": []
     },
     {
       "id": 7,
       "image": "assets/images/levels/level_07.png",
-      "answer": "hammer",
+      "answer": "superman",
       "alternatives": []
     },
     {
       "id": 8,
       "image": "assets/images/levels/level_08.png",
-      "answer": "mountain",
-      "alternatives": []
+      "answer": "spiderman",
+      "alternatives": ["spider man", "peter parker"]
     },
     {
       "id": 9,
       "image": "assets/images/levels/level_09.png",
-      "answer": "bicycle",
-      "alternatives": ["bike"]
+      "answer": "bojack horseman",
+      "alternatives": ["bojack"]
     },
     {
       "id": 10,
-      "image": "assets/images/levels/level_10.png",
-      "answer": "coffee cup",
-      "alternatives": ["cup of coffee", "coffee"]
+      "image": "assets/images/levels/level_10.jpg",
+      "answer": "france",
+      "alternatives": []
     }
   ]
 }
