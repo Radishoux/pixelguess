@@ -20,15 +20,12 @@ class PixelationService {
     final cached = _cache[key];
     if (cached != null) return cached;
 
-    final buffer = await ui.ImmutableBuffer.fromUint8List(sourceBytes);
-    final descriptor = await ui.ImageDescriptor.encoded(buffer);
+    final sourceSize = await _peekSize(sourceBytes);
     final dimensions = PixelDimensions.forIntensity(
-      sourceWidth: descriptor.width,
-      sourceHeight: descriptor.height,
+      sourceWidth: sourceSize.width,
+      sourceHeight: sourceSize.height,
       intensity: intensity,
     );
-    descriptor.dispose();
-    buffer.dispose();
 
     final codec = await ui.instantiateImageCodec(
       sourceBytes,
@@ -40,6 +37,29 @@ class PixelationService {
 
     _cache[key] = frame.image;
     return frame.image;
+  }
+
+  /// Reads a source image's intrinsic dimensions without a full decode
+  /// where possible. `ui.ImageDescriptor.width`/`.height` — the cheap
+  /// header-only path — throws `UnsupportedError` on Flutter web, so
+  /// that platform falls back to a one-off full decode purely to read
+  /// the size; every other platform uses the cheap path.
+  Future<({int width, int height})> _peekSize(Uint8List bytes) async {
+    try {
+      final buffer = await ui.ImmutableBuffer.fromUint8List(bytes);
+      final descriptor = await ui.ImageDescriptor.encoded(buffer);
+      final size = (width: descriptor.width, height: descriptor.height);
+      descriptor.dispose();
+      buffer.dispose();
+      return size;
+    } catch (_) {
+      final probeCodec = await ui.instantiateImageCodec(bytes);
+      final probeFrame = await probeCodec.getNextFrame();
+      final size = (width: probeFrame.image.width, height: probeFrame.image.height);
+      probeFrame.image.dispose();
+      probeCodec.dispose();
+      return size;
+    }
   }
 
   /// Disposes and drops every cached frame for [levelId] — call this when
