@@ -78,6 +78,8 @@ class _PixelatedImageState extends State<PixelatedImage> {
           : RawImage(
               key: ValueKey(_imageIntensity),
               image: image,
+              width: double.infinity,
+              height: double.infinity,
               fit: BoxFit.contain,
               filterQuality: FilterQuality.none,
             ),

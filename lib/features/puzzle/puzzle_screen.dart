@@ -225,7 +225,12 @@ class _PuzzleBody extends StatelessWidget {
                           return const CircularProgressIndicator();
                         }
                         if (solved) {
-                          return Image.asset(level.image, fit: BoxFit.contain);
+                          return Image.asset(
+                            level.image,
+                            width: double.infinity,
+                            height: double.infinity,
+                            fit: BoxFit.contain,
+                          );
                         }
                         return PixelatedImage(
                           pixelation: pixelation,
